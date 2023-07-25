@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- CSS -->
     <link rel="stylesheet" href="includes/style.css">
     <title>Document</title>
@@ -18,7 +20,7 @@
             <div class="container-fluid d-flex">
                 <h1 class="navbar-brand me-2">Ecommerce ICS 125</h1>
                 <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                    View Cart
+                    <i class="bi bi-bag"></i>
                 </a>
             </div>
         </div>
@@ -26,29 +28,41 @@
         <!-- DISPLAY THE SIDEBAR -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Shopping Cart </h5>
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Shopping Cart</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-              <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-              </div>
-              <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                  Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <div class="cart">
+                <h5 class="cart-title">New Cart</h5>
+                <!-- CART CONTENT -->
+                <div class="cart-content">
+
+                    <div class="cart-box">
+                        <img src="includes/assets/camera-product.jpg" alt="" class="cart-img">
+                        <div class="detail-box">
+                            <div class="cart-product-title">Camera</div>
+                            <div class="cart-price">$25.12</div>
+                            <input type="number" value="1" class="cart-quantity">
+                        </div>
+                        <!-- REMOVE CART -->
+                        <i class="bi bi-trash-fill cart-remove"></i>
+                    </div>
+
+                    <!-- TOTAL -->
+                    <div class="total">
+                        <div class="total-title">Total</div>
+                        <div class="total-price">$0</div>
+                    </div>
+                    <!-- BUY BUTTON -->
+                    <button type="button" class="btn-buy">Buy Now</button>
+                </div>
               </div>
             </div>
           </div>
     </header>
 
 
-
+    <!-- DISPLAY ALL THE PRODUCTS -->
     <main>
         <div class="container">
             <div class="product row d-flex justify-content-center">

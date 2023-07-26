@@ -47,14 +47,17 @@ $(document).ready(function () {
             input.addEventListener('change', quanityChange);
         }
 
+
+        // KEEP TRACK OF THE NUMBER OF ITEMS
+        let count = 0;
+        $('.show-quantity').hide();
+
         // ADD TO CART
         let addCart = document.getElementsByClassName('add-cart');
         console.log(addCart.length);
         for(let i = 0; i < addCart.length; i++){
             let button = addCart[i];
             button.addEventListener('click', (event) => {
-                let button = event.target;
-                let shopProducts = button.parentElement;
                 let title = data[i].title;
                 let price = data[i].price;
                 let img = data[i].image;
@@ -64,6 +67,7 @@ $(document).ready(function () {
 
             })
         }
+
 
         // ADD THE PRODUCTS TO YOUR CART
         function addProductToCart(title, price, img){
@@ -88,14 +92,26 @@ $(document).ready(function () {
         cartItems.append(cartShopBox);
         cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
         cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quanityChange);
+        
+        $('.show-quantity').show();
+        count += 1;
+        displayQuantity = document.querySelector('.show-quantity');
+        displayQuantity.innerHTML = count;
 
         }
+
 
 
         // REMOVE ITEMS FROM CART
         function removeCartItem(event) {
             let buttonClicked = event.target
             buttonClicked.parentElement.remove();
+
+            count -= 1;
+            displayQuantity = document.querySelector('.show-quantity');
+            displayQuantity.innerHTML = count;
+            
+
             updateTotal();
 
         }
@@ -106,18 +122,15 @@ $(document).ready(function () {
             if (isNaN(input.value) || input.value <= 0) {
                 input.value = 1
             }
+
+            count += 1;
+            displayQuantity = document.querySelector('.show-quantity');
+            displayQuantity.innerHTML = count;
+            
             updateTotal();
 
         }
 
-        // ADD TO CART
-        function addCartClicked(event) {
-            let button = event.target;
-            let shopProducts = button.parentElement;
-            let title = shopProducts.querySelectorAll('.cart-title');
-            console.log(data[title].title);
-
-        }
 
         //UPDATE TOTAL
         function updateTotal() {

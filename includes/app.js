@@ -17,6 +17,7 @@ $(document).ready(function () {
 
         var data = await response.json();
 
+        // DISPLAY THE IMFORMATION
         for (let i = 0; i < data.length; i++) {
             product.innerHTML += `
                 <div class="card" style="width: 15rem; margin: 0.2em;">
@@ -54,10 +55,9 @@ $(document).ready(function () {
 
         // ADD TO CART
         let addCart = document.getElementsByClassName('add-cart');
-        console.log(addCart.length);
-        for(let i = 0; i < addCart.length; i++){
+        for (let i = 0; i < addCart.length; i++) {
             let button = addCart[i];
-            button.addEventListener('click', (event) => {
+            button.addEventListener('click', () => {
                 let title = data[i].title;
                 let price = data[i].price;
                 let img = data[i].image;
@@ -68,15 +68,14 @@ $(document).ready(function () {
             })
         }
 
-
         // ADD THE PRODUCTS TO YOUR CART
-        function addProductToCart(title, price, img){
+        function addProductToCart(title, price, img) {
             let cartShopBox = document.createElement('div');
             cartShopBox.classList.add('cart-box');
             var cartItems = document.getElementsByClassName('cart-content')[0];
             let cartItemsName = cartItems.getElementsByClassName('cart-product-title')
-            
 
+            
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
@@ -88,15 +87,23 @@ $(document).ready(function () {
             <i class="bi bi-trash-fill cart-remove"></i>
         `;
 
-        cartShopBox.innerHTML = cartBoxContent;
-        cartItems.append(cartShopBox);
-        cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
-        cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quanityChange);
+            cartShopBox.innerHTML = cartBoxContent;
+            cartItems.append(cartShopBox);
+            cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
+            cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quanityChange);
+
+            $('.show-quantity').show();
+            count += 1;
+            displayQuantity = document.querySelector('.show-quantity');
+            displayQuantity.innerHTML = count;
+
+            console.log(cartItemsName);
+
+            // for(let i = 0; i < cartItemsName.length; i++){
+            //     console.log(cartItemsName[i].innerHTML);
+            //     console.log("------------------------");
+            // }
         
-        $('.show-quantity').show();
-        count += 1;
-        displayQuantity = document.querySelector('.show-quantity');
-        displayQuantity.innerHTML = count;
 
         }
 
@@ -110,7 +117,7 @@ $(document).ready(function () {
             count -= 1;
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
-            
+
 
             updateTotal();
 
@@ -126,10 +133,16 @@ $(document).ready(function () {
             count += 1;
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
-            
+
             updateTotal();
 
         }
+
+        // function addQuantity(title){
+        //     let input = document.getElementsByClassName('cart-quantity')[0].value;
+            
+        //     console.log(title);
+        // }
 
 
         //UPDATE TOTAL
@@ -155,6 +168,10 @@ $(document).ready(function () {
 
 
     }
+
+
+    // CURRENCY API
+    
 
 
 });

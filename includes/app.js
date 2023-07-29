@@ -25,7 +25,7 @@ $(document).ready(function () {
                     <div class="card-body">
                         <h5 class="card-title">${data[i].title}</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <p class="card-text fw-bold">$${data[i].price}</p>
+                        <p class="card-text fw-bold displayCurrency">${data[i].price}</p>
                         <button class="btn btn-success add-cart" id="newButton">Add To Card</button>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ $(document).ready(function () {
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
                 <div class="cart-product-title">${title}</div>
-                <div class="cart-price">${price}</div>
+                <div class="cart-price">$${price}</div>
                 <input type="number" value="1" class="cart-quantity">
             </div>
             <!-- REMOVE CART -->
@@ -97,7 +97,7 @@ $(document).ready(function () {
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
 
-            console.log(cartItemsName);
+            // console.log(cartItemsName);
 
             // for(let i = 0; i < cartItemsName.length; i++){
             //     console.log(cartItemsName[i].innerHTML);
@@ -167,11 +167,30 @@ $(document).ready(function () {
         updateTotal();
 
 
+        // TODO: need to display the currency to change
+         // CURRENCY API
+    let currecnyURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`;
+    async function getCurrency(){
+        let response = await fetch(currecnyURL);
+        let currency = await response.json()
+
+        let displayPrices = document.querySelectorAll('.displayCurrency');
+        let toCurrency = document.querySelector('.toCurrency');
+        toCurrency.addEventListener('change', (event) => {
+            resultFrom = `${event.target.value}`;
+
+            // console.log(displayPrices);
+        })
+        
+        
     }
 
+    getCurrency();
 
-    // CURRENCY API
-    
+    $('.btn-buy').click(function (){
+        console.log('button is working');
+    });
+    }
 
 
 });

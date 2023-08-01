@@ -128,6 +128,7 @@ $(document).ready(function () {
             let input = event.target;
             if (isNaN(input.value) || input.value <= 0) {
                 input.value = 1
+                count += 1;
             }
 
             count += 1;
@@ -169,23 +170,50 @@ $(document).ready(function () {
 
         // TODO: need to display the currency to change
         // CURRENCY API
-        let currecnyURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`;
-        async function getCurrency() {
-            let response = await fetch(currecnyURL);
-            let currency = await response.json()
+        // getCurrency();
+        // let currecnyURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad.json`;
+        // async function getCurrency() {
+        //     let response = await fetch(currecnyURL);
+        //     let currency = await response.json()
 
-            let displayPrices = document.querySelectorAll('.displayCurrency');
-            let toCurrency = document.querySelector('.toCurrency');
-            toCurrency.addEventListener('change', (event) => {
-                resultFrom = `${event.target.value}`;
+        //     let displayPrices = document.querySelectorAll('.displayCurrency');
+        //     let toCurrency = document.querySelector('.toCurrency');
+        // }
 
-                // console.log(displayPrices);
-            })
+        let toCurrency = document.querySelector('.toCurrency');
+        let resultFrom = ''
+        toCurrency.addEventListener('change', (event) => {
+             resultFrom = `${event.target.value}`;
+
+            //  if (resultFrom == 'jpy'){
+            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
+            //     fetch(currencies)
+            //         .then(response => response.json())
+            //         .then(data => console.log(data));
+            //  }
+
+            if(resultFrom == 'jpy'){
+                let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
+                fetch(currencies)
+                    .then(response => response.json())
+                    .then(data => console.log(data.jpy));
+            }
+            else if (resultFrom == 'usd'){
+                let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
+                fetch(currencies)
+                    .then(response => response.json())
+                    .then(data => console.log(data.usd));
+            }
+            
+        })
 
 
-        }
+        // let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
+        // fetch(currencies)
+        //     .then(response => response.json())
+        //     .then(data => console.log(data));
 
-        getCurrency();
+
 
 
         $('.btn-buy').click(function () {
@@ -193,25 +221,7 @@ $(document).ready(function () {
         });
 
 
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-            'use strict';
         
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation');
-        
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms).forEach((form) => {
-                
-            form.addEventListener('submit', (event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-            });
-        })();
 
 
     }

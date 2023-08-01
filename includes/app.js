@@ -75,7 +75,7 @@ $(document).ready(function () {
             var cartItems = document.getElementsByClassName('cart-content')[0];
             let cartItemsName = cartItems.getElementsByClassName('cart-product-title')
 
-            
+
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
@@ -103,7 +103,7 @@ $(document).ready(function () {
             //     console.log(cartItemsName[i].innerHTML);
             //     console.log("------------------------");
             // }
-        
+
 
         }
 
@@ -140,7 +140,7 @@ $(document).ready(function () {
 
         // function addQuantity(title){
         //     let input = document.getElementsByClassName('cart-quantity')[0].value;
-            
+
         //     console.log(title);
         // }
 
@@ -168,29 +168,55 @@ $(document).ready(function () {
 
 
         // TODO: need to display the currency to change
-         // CURRENCY API
-    let currecnyURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`;
-    async function getCurrency(){
-        let response = await fetch(currecnyURL);
-        let currency = await response.json()
+        // CURRENCY API
+        let currecnyURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`;
+        async function getCurrency() {
+            let response = await fetch(currecnyURL);
+            let currency = await response.json()
 
-        let displayPrices = document.querySelectorAll('.displayCurrency');
-        let toCurrency = document.querySelector('.toCurrency');
-        toCurrency.addEventListener('change', (event) => {
-            resultFrom = `${event.target.value}`;
+            let displayPrices = document.querySelectorAll('.displayCurrency');
+            let toCurrency = document.querySelector('.toCurrency');
+            toCurrency.addEventListener('change', (event) => {
+                resultFrom = `${event.target.value}`;
 
-            // console.log(displayPrices);
-        })
+                // console.log(displayPrices);
+            })
+
+
+        }
+
+        getCurrency();
+
+
+        $('.btn-buy').click(function () {
+            // console.log('button is working');
+        });
+
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict';
         
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation');
         
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach((form) => {
+                
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+            });
+        })();
+
+
     }
 
-    getCurrency();
 
-    $('.btn-buy').click(function (){
-        console.log('button is working');
-    });
-    }
 
 
 });

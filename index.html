@@ -62,7 +62,10 @@
                         <div class="total-price">$0</div>
                     </div>
                     <!-- BUY BUTTON -->
-                    <button type="button" class="btn-buy btn btn-primary">Buy Now</button>
+                    <button class="btn-buy btn btn-primary" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Buy Now
+                    </button>
                 </div>
             </div>
         </div>
@@ -73,16 +76,142 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Checkout</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                aria-selected="true">
+                                <i class="bi bi-credit-card"></i>
+                                Payment Method
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">
+                                <i class="bi bi-person-lines-fill"></i>
+                                Billing Details
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                aria-selected="false">
+                                <i class="bi bi-truck"></i>
+                                Shipping
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                aria-selected="false">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Order Confirmation
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="pills-tabContent">
+                        <!-- CREDIT CARD NUMBER -->
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                           <form action="" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Card Number</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cardNumber" aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                    <p class="valid-feedback">Looks Good!</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Expiration Date</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="basic-url" placeholder="MM" aria-describedby="basic-addon3 basic-addon4">
+                                        <input type="text" class="form-control" id="basic-url" placeholder="YY" aria-describedby="basic-addon3 basic-addon4">
+                                        <input type="text" class="form-control" id="basic-url" placeholder="Security Number" aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                    <button type="button" id="continueBtn" class="btn btn-primary" data-bs-toggle="pill" data-bs-target="#pills-profile-tab">Continue</button>
+                                </div>
+                           </form>
+
+                           <!-- PERSONAL INFORMATION -->
+                           <form class="row g-3 needs-validation" novalidate>
+                            <div class="col-md-4">
+                              <div class="form-outline">
+                                <input type="text" class="form-control" id="validationCustom01" value="Mark" required />
+                                <label for="validationCustom01" class="form-label">First name</label>
+                                <div class="valid-feedback">Looks good!</div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-outline">
+                                <input type="text" class="form-control" id="validationCustom02" value="Otto" required />
+                                <label for="validationCustom02" class="form-label">Last name</label>
+                                <div class="valid-feedback">Looks good!</div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="input-group form-outline">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required />
+                                <label for="validationCustomUsername" class="form-label">Username</label>
+                                <div class="invalid-feedback">Please choose a username.</div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-outline">
+                                <input type="text" class="form-control" id="validationCustom03" required />
+                                <label for="validationCustom03" class="form-label">City</label>
+                                <div class="invalid-feedback">Please provide a valid city.</div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-outline">
+                                <input type="text" class="form-control" id="validationCustom05" required />
+                                <label for="validationCustom05" class="form-label">Zip</label>
+                                <div class="invalid-feedback">Please provide a valid zip.</div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+                                <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+                                <div class="invalid-feedback">You must agree before submitting.</div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button class="btn btn-primary" type="submit">Submit form</button>
+                            </div>
+                          </form>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab" tabindex="0">
+                            <h2>Billing Informtion</h2>
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="pills-disabled" role="tabpanel"
+                            aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
+                    </div>
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    <button type="button" class="btn btn-primary" >Save changes</button>
+                </div> -->
             </div>
         </div>
     </div>

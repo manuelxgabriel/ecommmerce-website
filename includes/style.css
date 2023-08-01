@@ -97,3 +97,8 @@
 .btn-buy:hover {
     background: green;
 }
+
+/* MODAL STYLING */
+.modal {
+    --bs-modal-width: 900px;
+}

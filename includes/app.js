@@ -200,9 +200,59 @@ $(document).ready(function () {
         
         function checkCard(input){
             let cardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+            let errorCard = document.querySelector('#errorCard');
+
+            // CHCEK THE CREDIT CART
+            if(!cardRegex.test(input)){
+                errorCard.innerHTML = `<span style='color:red'> Invalid Card </span>`;
+                return false;
+            } else {
+                errorCard.innerHTML = `<span style='color:green'> Valid Card </span>`;
+                return cardRegex.test(input);
+            }  
             
-            
-            return cardRegex.test(input);
+        }
+
+        function checkMonth(month, year, cvs){
+
+            let displayMonth = document.querySelector('#errorMonth');
+            let monthValid = true;
+
+            if(month > 0 && month <= 12){
+                displayMonth.innerHTML = `<span style='color:green'>Valid</span>`;
+                return monthValid;
+            } else {
+                displayMonth.innerHTML = `<span style='color:red'>Invalid</span>`;
+                return monthValid = false;
+            }
+
+
+        }
+
+        function checkYear(year){
+            let displayYear = document.querySelector('#errorYear');
+            let yearValid = true;
+
+            if(year.length == 4 && parseInt(year) >= 2023 ){
+                displayYear.innerHTML = `<span style='color:green'>Valid</span>`;
+                return yearValid;
+            } else {
+                displayYear.innerHTML = `<span style='color:red'>Invalid</span>`;
+                return yearValid = false;
+            }
+        }
+
+        function checkCVS(cvs){
+            let displayCVS = document.querySelector('#errorCVS');
+            let cvsValid = true
+
+            if(cvs.length == 3){
+                displayCVS.innerHTML = `<span style='color:green'>Valid</span>`;
+                return cvsValid;
+            } else {
+                displayCVS.innerHTML = `<span style='color:red'>Invalid</span>`;
+                return cvsValid = false;
+            }
         }
         
         
@@ -210,10 +260,21 @@ $(document).ready(function () {
         $('#cardInfo').click(function(){
 
             let cardValue = document.querySelector('#creditNumber').value;
-            checkCard(cardValue);
-            console.log(result);
+            let cardResult = checkCard(cardValue);
 
-            $("#pills-profile-tab").click();
+            let cardMonth = parseInt($('#month').val());
+            let monthResult = checkMonth(cardMonth);
+
+            let cardYear = $('#year').val();
+            let yearResult = checkYear(cardYear)
+
+            let cardCVS = $('#cvs').val();
+            let cvsResult = checkCVS(cardCVS);
+
+            if(cardResult && monthResult && yearResult && cvsResult){
+                $("#pills-profile-tab").click();
+            }
+
         })
 
 

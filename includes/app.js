@@ -115,6 +115,7 @@ $(document).ready(function () {
             buttonClicked.parentElement.remove();
 
             count -= 1;
+
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
 
@@ -126,24 +127,18 @@ $(document).ready(function () {
         // QUANTITY CHANGES 
         function quanityChange(event) {
             let input = event.target;
+            console.log(input.value);
             if (isNaN(input.value) || input.value <= 0) {
                 input.value = 1
-                count += 1;
             }
 
             count += 1;
-            displayQuantity = document.querySelector('.show-quantity');
-            displayQuantity.innerHTML = count;
+
 
             updateTotal();
 
         }
 
-        // function addQuantity(title){
-        //     let input = document.getElementsByClassName('cart-quantity')[0].value;
-
-        //     console.log(title);
-        // }
 
 
         //UPDATE TOTAL
@@ -163,64 +158,74 @@ $(document).ready(function () {
             }
 
             document.querySelectorAll('.total-price')[0].innerHTML = `$ ${total}`;
+
+            displayQuantity = document.querySelector('.show-quantity');
+            displayQuantity.innerHTML = count;
         }
 
         updateTotal();
 
-
-        // TODO: need to display the currency to change
-        // CURRENCY API
-        // getCurrency();
-        // let currecnyURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad.json`;
-        // async function getCurrency() {
-        //     let response = await fetch(currecnyURL);
-        //     let currency = await response.json()
-
-        //     let displayPrices = document.querySelectorAll('.displayCurrency');
-        //     let toCurrency = document.querySelector('.toCurrency');
-        // }
-
+        // GET THE CURRENCY THAT WAS CHOOSEN
         let toCurrency = document.querySelector('.toCurrency');
         let resultFrom = ''
         toCurrency.addEventListener('change', (event) => {
              resultFrom = `${event.target.value}`;
 
-            //  if (resultFrom == 'jpy'){
-            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
-            //     fetch(currencies)
-            //         .then(response => response.json())
-            //         .then(data => console.log(data));
-            //  }
-
+             // CHANGE TO JPY
             if(resultFrom == 'jpy'){
                 let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
                 fetch(currencies)
                     .then(response => response.json())
                     .then(data => console.log(data.jpy));
             }
+            // CHANGE TO USD
             else if (resultFrom == 'usd'){
                 let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
                 fetch(currencies)
                     .then(response => response.json())
                     .then(data => console.log(data.usd));
             }
+            else {
+                let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/cad.json`;
+                fetch(currencies)
+                    .then(response => response.json())
+                    .then(data => console.log(data.cad));
+            }
+
+
             
+            
+        });
+        
+        
+        function checkCard(input){
+            let cardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+            
+            
+            return cardRegex.test(input);
+        }
+        
+        
+        
+        $('#cardInfo').click(function(){
+
+            let cardValue = document.querySelector('#creditNumber').value;
+            checkCard(cardValue);
+            console.log(result);
+
+            $("#pills-profile-tab").click();
         })
 
 
-        // let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
-        // fetch(currencies)
-        //     .then(response => response.json())
-        //     .then(data => console.log(data));
 
 
 
 
-        $('.btn-buy').click(function () {
-            // console.log('button is working');
-        });
+        $('#billingInfo').click(function(){
+            $('#pills-contact-tab').click();
+        })
 
-
+        
         
 
 

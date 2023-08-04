@@ -82,42 +82,64 @@
 
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                aria-selected="true">
+                                <i class="bi bi-credit-card-2-back"></i>
+                                Payment Method
+                            </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">
+                                <i class="bi bi-person-lines-fill"></i>
+                                Billing Details
+                            </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                aria-selected="false">Contact</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" >Disabled</button>
+                            <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled"
+                                aria-selected="false">Disabled</button>
                         </li>
-                      </ul>
+                    </ul>
 
-                      <!-- PAYMENT METHOD -->
-                      <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                    <!-- PAYMENT METHOD -->
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab" tabindex="0">
                             <h2>Payment Method</h2>
                             <div class="mb-3">
-                                <label for="basic-url" class="form-label">Card Number : 4111111111111111</label>
+                                <label for="basic-url" class="form-label">Card Number</label>
                                 <div class="input-group">
-                                  <span class="input-group-text" id="basic-addon3"><i class="bi bi-credit-card-2-back"></i></span>
-                                  <input type="text" id="creditNumber" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" placeholder="Credit Card Number">
+                                    <span class="input-group-text" id="basic-addon3"><i
+                                            class="bi bi-credit-card-2-back"></i></span>
+                                    <input type="text" id="creditNumber" class="form-control" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4" placeholder="Credit Card Number">
                                 </div>
+                                <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                    input group.</div>
                                 <div id="errorCard"></div>
                             </div>
                             <label for="basic-url" class="form-label">Expiration Date</label>
                             <div class="input-group text-center">
                                 <div class="row row-cols-3">
                                     <div class="col">
-                                        <input type="number" id="month" class="form-control m-3" placeholder="MM" aria-label="Username">
+                                        <input type="number" id="month" class="form-control m-3" placeholder="MM"
+                                            aria-label="Username">
                                     </div>
                                     <div class="col">
-                                        <input type="number" id="year" class="form-control m-3" placeholder="YYYY" aria-label="Server">
+                                        <input type="number" id="year" class="form-control m-3" placeholder="YYYY"
+                                            aria-label="Server">
                                     </div>
                                     <div class="col">
-                                        <input type="number" id="cvs" class="form-control m-3" placeholder="CVS : 3 digits" aria-label="Server">
+                                        <input type="number" id="cvs" class="form-control m-3"
+                                            placeholder="CVS : 3 digits" aria-label="Server">
                                     </div>
                                     <div class="col">
                                         <p id="errorMonth">Error here</p>
@@ -130,18 +152,122 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <button type="button" class="btn btn-primary" id="cardInfo" >Contiune</button>
+
+                            <button type="button" class="btn btn-primary" id="cardInfo">Contiune</button>
                         </div>
 
 
                         <!-- BILLING INFORMATION -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab" tabindex="0">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="basic-url" class="form-label">First Name</label>
+                                            <div class="input-group">
+                                                <input type="text" id="first-name" class="form-control" id="basic-url"
+                                                    aria-describedby="basic-addon3 basic-addon4">
+                                            </div>
+                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                                input group.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="basic-url" class="form-label">Last Name</label>
+                                            <div class="input-group">
+                                                <input type="text" id="last-name" class="form-control" id="basic-url"
+                                                    aria-describedby="basic-addon3 basic-addon4">
+                                            </div>
+                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                                input group.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="basic-url" class="form-label">Billing Address 1</label>
+                                    <div class="input-group">
+                                        <input type="text" id="address" class="form-control" id="basic-url"
+                                            aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="basic-url" class="form-label">City</label>
+                                            <div class="input-group">
+                                                <input type="text"  id="city" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                                            </div>
+                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                                input group.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="basic-url" class="form-label">Province</label>
+                                            <div class="input-group">
+                                                <select id="state" class="form-select" aria-label="Default select example">
+                                                    <option value="none" selected>Select state / province</option>
+                                                </select>
+                                                
+                                            </div>
+                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                                input group.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="basic-url" class="form-label">Country</label>
+                                            <div class="input-group">
+                                                <!-- <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"> -->
+                                                <select class="form-select" aria-label="Default select example" id="country">
+                                                    <option value="none" selected disabled>Select Country</option>
+                                                    <option value="canada">Canada</option>
+                                                    <option value="usa">United States</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                                input group.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="basic-url" class="form-label">Postal Code / Zip</label>
+                                            <div class="input-group">
+                                                <input type="text" id="postal" class="form-control" aria-describedby="basic-addon3 basic-addon4">
+                                            </div>
+                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
+                                                input group.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="basic-url" class="form-label">Phone Number</label>
+                                    <div class="input-group">
+                                        <input type="text" id="phone-number" class="form-control" aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="basic-url" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="email"
+                                            aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
                             <button class="btn btn-primary" id="billingInfo">Contiune</button>
                         </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
-                      </div>
+
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="pills-disabled" role="tabpanel"
+                            aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
+                    </div>
 
 
                 </div>

@@ -169,17 +169,17 @@ $(document).ready(function () {
         let toCurrency = document.querySelector('.toCurrency');
         let resultFrom = ''
         toCurrency.addEventListener('change', (event) => {
-             resultFrom = `${event.target.value}`;
+            resultFrom = `${event.target.value}`;
 
-             // CHANGE TO JPY
-            if(resultFrom == 'jpy'){
+            // CHANGE TO JPY
+            if (resultFrom == 'jpy') {
                 let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
                 fetch(currencies)
                     .then(response => response.json())
                     .then(data => console.log(data.jpy));
             }
             // CHANGE TO USD
-            else if (resultFrom == 'usd'){
+            else if (resultFrom == 'usd') {
                 let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
                 fetch(currencies)
                     .then(response => response.json())
@@ -193,32 +193,33 @@ $(document).ready(function () {
             }
 
 
-            
-            
+
+
         });
-        
-        
-        function checkCard(input){
-            let cardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+
+
+        function checkCard(input) {
+            // let cardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+            let cardRegex = /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/;
             let errorCard = document.querySelector('#errorCard');
 
             // CHCEK THE CREDIT CART
-            if(!cardRegex.test(input)){
+            if (!cardRegex.test(input)) {
                 errorCard.innerHTML = `<span style='color:red'> Invalid Card </span>`;
                 return false;
             } else {
                 errorCard.innerHTML = `<span style='color:green'> Valid Card </span>`;
                 return cardRegex.test(input);
-            }  
-            
+            }
+
         }
 
-        function checkMonth(month, year, cvs){
+        function checkMonth(month, year, cvs) {
 
             let displayMonth = document.querySelector('#errorMonth');
             let monthValid = true;
 
-            if(month > 0 && month <= 12){
+            if (month > 0 && month <= 12) {
                 displayMonth.innerHTML = `<span style='color:green'>Valid</span>`;
                 return monthValid;
             } else {
@@ -229,11 +230,11 @@ $(document).ready(function () {
 
         }
 
-        function checkYear(year){
+        function checkYear(year) {
             let displayYear = document.querySelector('#errorYear');
             let yearValid = true;
 
-            if(year.length == 4 && parseInt(year) >= 2023 ){
+            if (year.length == 4 && parseInt(year) >= 2023) {
                 displayYear.innerHTML = `<span style='color:green'>Valid</span>`;
                 return yearValid;
             } else {
@@ -242,11 +243,11 @@ $(document).ready(function () {
             }
         }
 
-        function checkCVS(cvs){
+        function checkCVS(cvs) {
             let displayCVS = document.querySelector('#errorCVS');
             let cvsValid = true
 
-            if(cvs.length == 3){
+            if (cvs.length == 3) {
                 displayCVS.innerHTML = `<span style='color:green'>Valid</span>`;
                 return cvsValid;
             } else {
@@ -254,10 +255,10 @@ $(document).ready(function () {
                 return cvsValid = false;
             }
         }
-        
-        
-        
-        $('#cardInfo').click(function(){
+
+
+
+        $('#cardInfo').click(function () {
 
             let cardValue = document.querySelector('#creditNumber').value;
             let cardResult = checkCard(cardValue);
@@ -271,23 +272,99 @@ $(document).ready(function () {
             let cardCVS = $('#cvs').val();
             let cvsResult = checkCVS(cardCVS);
 
-            if(cardResult && monthResult && yearResult && cvsResult){
+            if (cardResult && monthResult && yearResult && cvsResult) {
                 $("#pills-profile-tab").click();
             }
 
-        })
+        });
+
+
+        class Billing {
+            constructor(firstName, lastName, address, city, state, country, postal, phone, email) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.address = address;
+                this.city = city;
+                this.state = state;
+                this.country = country;
+                this.postal = postal;
+                this.phone = phone;
+                this.email = email;
+            }
+        }
 
 
 
+        $('#billingInfo').click(function () {
+            let firstName = document.getElementById('first-name').value;
+            let lastName = document.getElementById('last-name').value;
+            let address = document.getElementById('address').value;
+            let city = document.getElementById('city').value;
+            let state = selectState.value;
+            let country = countrySelected.value;
+            let postal = document.getElementById('postal').value;
+            let phone = document.getElementById('phone-number').value;
+            let email = document.getElementById('email').value;
+
+
+            let personInfo = new Billing(firstName, lastName, address, city, state, country, postal, phone, email);
+
+            console.log(personInfo);
+            // $('#pills-contact-tab').click();
+        });
+
+        // ALL OF THE STATES & PROVICES
+        const canadianProvinces = [
+            "Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador",
+            "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"
+        ];
+
+        const usStates = [
+            "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+            "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+            "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+            "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+            "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+            "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
+            "West Virginia", "Wisconsin", "Wyoming"
+        ];
+
+        const emptyState = [];
+
+
+        // UPDATE THE STATES THAT THE COUNTRY WAS SELECTED
+        let countrySelected = document.getElementById('country');
+        let selectState = document.getElementById('state');
+
+        countrySelected.addEventListener('change', updateStates);
+
+        function updateStates(){
+            let selectCountry = countrySelected.value;
+
+            selectState.innerHTML = `<option value="none" selected>Select state / province</option>`;
+
+
+            if(selectCountry === 'canada'){
+
+                for( const province of canadianProvinces){
+                    const option = document.createElement("option");
+                    option.value = province;
+                    option.textContent = province;
+                    selectState.appendChild(option);
+                }
+
+            } else if (selectCountry == 'usa') {
+                for (const state of usStates) {
+                    const option = document.createElement("option");
+                    option.value = state;
+                    option.textContent = state;
+                    selectState.appendChild(option);
+                  }
+            }
+        }
 
 
 
-        $('#billingInfo').click(function(){
-            $('#pills-contact-tab').click();
-        })
-
-        
-        
 
 
     }

@@ -141,11 +141,11 @@ $(document).ready(function () {
 
 
 
+        let total = 0;
         //UPDATE TOTAL
         function updateTotal() {
             let cartContent = document.querySelectorAll('.cart-content')[0];
             let cartBoxes = cartContent.querySelectorAll('.cart-box');
-            let total = 0;
             for (let i = 0; i < cartBoxes.length; i++) {
                 let cartBox = cartBoxes[i]
                 let priceElement = cartBox.querySelectorAll('.cart-price')[0];
@@ -258,6 +258,7 @@ $(document).ready(function () {
 
 
 
+        // CARD INFORMATION
         $('#cardInfo').click(function () {
 
             let cardValue = document.querySelector('#creditNumber').value;
@@ -295,6 +296,7 @@ $(document).ready(function () {
 
 
 
+        // BILLING INFORMATION
         $('#billingInfo').click(function () {
             let firstName = document.getElementById('first-name').value;
             let lastName = document.getElementById('last-name').value;
@@ -309,14 +311,13 @@ $(document).ready(function () {
 
             let personInfo = new Billing(firstName, lastName, address, city, state, country, postal, phone, email);
 
-            console.log(personInfo);
-            // $('#pills-contact-tab').click();
+            $('#pills-contact-tab').click();
         });
 
         // ALL OF THE STATES & PROVICES
         const canadianProvinces = [
-            "Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador",
-            "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"
+            "Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories",
+            "Nova Scotia", "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"
         ];
 
         const usStates = [
@@ -329,7 +330,6 @@ $(document).ready(function () {
             "West Virginia", "Wisconsin", "Wyoming"
         ];
 
-        const emptyState = [];
 
 
         // UPDATE THE STATES THAT THE COUNTRY WAS SELECTED
@@ -361,10 +361,85 @@ $(document).ready(function () {
                     selectState.appendChild(option);
                   }
             }
+           
+        }
+
+
+        // SHIPPING INFORMATION
+        $('#shippingInfo').click(function (){
+            displayTaxInfo(); // DISPLAY THE TAXES WHEN THE PROVINCE
+
+            $('#pills-disabled-tab').click();
+        });
+
+        let shipping = document.getElementById('shipping');
+        shipping.addEventListener('change', updateShipping);
+        $('.packageInfo').hide();
+
+        function updateShipping(){
+            console.log(shipping.checked);
+            if(shipping.checked == false){
+                $('.packageInfo').show();
+            } else {
+                $('.packageInfo').hide();
+            }
+        }
+
+
+        
+        const taxRates = {
+            "canada": {
+                "Alberta": 5,
+                "British Columbia": 12,
+                "Manitoba":  12,
+                "New Brunswick": 15,
+                "Newfoundland and Labrador": 15,
+                "Northwest Territories": 5,
+                "Nunavut": 5,
+                "Nova Scotia": 15,
+                "Ontario": 13,
+                "Prince Edward Island": 15,
+                "Quebec": 14.975,
+                "Saskatchewan": 11,
+                "Yukon": 5,
+            }
+        }
+
+
+        
+        let subtotal = document.getElementById('subtotal');
+        let taxElementInfo = document.getElementById('tax-info');
+        let locationTax = document.getElementById('location-tax');
+        let orderTotal = document.getElementById('order-total');
+        
+
+        function displayTaxInfo(){
+            const selectedCountry = countrySelected.value;
+            const selectedState = selectState.value;
+
+            let shippingCost = 5;
+
+            if(selectedCountry in taxRates && selectedState in taxRates[selectedCountry]){
+                const taxRate = taxRates[selectedCountry][selectedState];
+                let totalTax = (total*(taxRate/100)).toFixed(2)
+                taxElementInfo.innerHTML = `$${totalTax}`;
+                locationTax.textContent = `${selectedState}`;
+
+                 // DISPLAY THE SUBTOTAL
+                subtotal.innerHTML = `$${total}`;
+                let orderPrice = parseFloat(totalTax) + parseFloat(total) + shippingCost;
+                orderTotal.innerHTML = `$${orderPrice.toFixed(2)}`;
+
+            }
+
+           
+            
+
         }
 
 
 
+        
 
 
     }

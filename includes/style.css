@@ -102,3 +102,16 @@
 .modal {
     --bs-modal-width: 900px;
 }
+
+.black-line {
+    background-color: black;
+    height: 1px;
+    width: 100%;
+}
+
+.grey-line {
+    background-color: #EEF7FF;
+    height: 1px;
+    width: 100%;
+    padding: 10px;
+}

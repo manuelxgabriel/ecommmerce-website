@@ -308,11 +308,116 @@ $(document).ready(function () {
             let phone = document.getElementById('phone-number').value;
             let email = document.getElementById('email').value;
 
+            let firstResult = checkFirst(firstName);
+            let lastResult = checklast(lastName);
+            let cityResult = checkCity(city);
+            let postalResult = checkPostal(postal);
+            let countryResult = countrySelected.value; // NEED TO DISPLAY THE ERROR TO THE HTML
+            let stateResult = selectState.value;
+            let phoneResult = checkPhone(phone);
+            let emailResult = checkEmail(email);
 
             let personInfo = new Billing(firstName, lastName, address, city, state, country, postal, phone, email);
 
-            $('#pills-contact-tab').click();
+            // $('#pills-contact-tab').click();
         });
+
+        function checkFirst(value){
+            firstRegex = /^[A-Za-z'-]+$/;
+
+            if(!firstRegex.test(value)){
+                $('#firstError')
+                    .css('color','red')
+                    .html(`Invalid`);
+                    return firstRegex.test(value);
+            } else {
+                $('#firstError')
+                    .css('color','green')
+                    .html(`Valid`);
+                return firstRegex.test(value);
+            }
+        }
+
+        function checklast(value){
+            lastRegex = /^[A-Za-z'-]+$/;
+
+            if(!lastRegex.test(value)){
+                $('#lastError')
+                    .css('color','red')
+                    .html(`Invalid`);
+                    return lastRegex.test(value);
+            } else {
+                $('#lastError')
+                    .css('color','green')
+                    .html(`Valid`);
+                return lastRegex.test(value);
+            }
+        }
+
+        function checkCity(value){
+            cityRegex = /^[A-Za-z'-]+$/;
+
+            if(!cityRegex.test(value)){
+                $('#cityError')
+                    .css('color','red')
+                    .html(`Invalid`);
+                    return cityRegex.test(value);
+            } else {
+                $('#cityError')
+                    .css('color','green')
+                    .html(`Valid`);
+                return cityRegex.test(value);
+            }
+        }
+
+        function checkPostal(value){
+            postalRegex = /^[ABCEGHJKLMNPRSTVXY]\d[A-Z] \d[A-Z]\d$/;
+
+            if(!postalRegex.test(value)){
+                $('#postalError')
+                    .css('color','red')
+                    .html(`Invalid`);
+                    return postalRegex.test(value);
+            } else {
+                $('#postalError')
+                    .css('color','green')
+                    .html(`Valid`);
+                return postalRegex.test(value);
+            }
+        }
+
+        function checkPhone(value){
+            phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/
+
+            if(!phoneRegex.test(value)){
+                $('#phoneError')
+                    .css('color','red')
+                    .html(`Invalid`);
+                    return phoneRegex.test(value);
+            } else {
+                $('#phoneError')
+                    .css('color','green')
+                    .html(`Valid`);
+                return phoneRegex.test(value);
+            }
+        }
+
+        function checkEmail(value){
+            emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
+            if(!emailRegex.test(value)){
+                $('#emailError')
+                    .css('color','red')
+                    .html(`Invalid`);
+                    return emailRegex.test(value);
+            } else {
+                $('#emailError')
+                    .css('color','green')
+                    .html(`Valid`);
+                return emailRegex.test(value);
+            }
+        }
+
 
         // ALL OF THE STATES & PROVICES
         const canadianProvinces = [
@@ -365,6 +470,7 @@ $(document).ready(function () {
         }
 
 
+
         // SHIPPING INFORMATION
         $('#shippingInfo').click(function (){
             displayTaxInfo(); // DISPLAY THE TAXES WHEN THE PROVINCE
@@ -377,7 +483,6 @@ $(document).ready(function () {
         $('.packageInfo').hide();
 
         function updateShipping(){
-            console.log(shipping.checked);
             if(shipping.checked == false){
                 $('.packageInfo').show();
             } else {
@@ -402,7 +507,60 @@ $(document).ready(function () {
                 "Quebec": 14.975,
                 "Saskatchewan": 11,
                 "Yukon": 5,
+            },
+            "usa": {
+                "Alabama": 4,
+                "Alaska": 0,
+                "Arizona": 5.6,
+                "Arkansas": 6.5,
+                "California": 7.25,
+                "Colorado": 2.9,
+                "Connecticut": 6.35,
+                "Delaware": 0,
+                "Florida": 6,
+                "Georgia": 4,
+                "Hawaii": 4.5,
+                "Idaho": 6,
+                "Illinois": 6.25,
+                "Indiana": 7,
+                "Iowa": 6,
+                "Kansas": 6.5,
+                "Kentucky": 6,
+                "Louisiana": 4.45,
+                "Maine": 5.5,
+                "Maryland": 6,
+                "Massachusetts": 6.25,
+                "Michigan": 6,
+                "Minnesota": 6.875,
+                "Mississippi": 7,
+                "Missouri": 4.225,
+                "Montana": 0,
+                "Nebraska": 5.5,
+                "Nevada": 6.85,
+                "New Hampshire": 0,
+                "New Jersey": 6.625,
+                "New Mexico": 5.125,
+                "New York": 4,
+                "North Carolina": 4.75,
+                "North Dakota": 5,
+                "Ohio": 5.75,
+                "Oklahoma": 4.5,
+                "Oregon": 0,
+                "Pennsylvania": 6,
+                "Rhode Island": 7,
+                "South Carolina": 6,
+                "South Dakota": 4.5,
+                "Tennessee": 7,
+                "Texas": 6.25,
+                "Utah": 4.85,
+                "Vermont": 6,
+                "Virginia": 5.3,
+                "Washington": 6.5,
+                "West Virginia": 6,
+                "Wisconsin": 5,
+                "Wyoming": 4,
             }
+              
         }
 
 

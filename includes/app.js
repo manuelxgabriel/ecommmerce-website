@@ -82,7 +82,7 @@ $(document).ready(function () {
             var cartItems = document.getElementsByClassName('cart-content')[0];
             let cartItemsName = cartItems.getElementsByClassName('cart-product-title')
 
-
+            
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
@@ -111,6 +111,28 @@ $(document).ready(function () {
             //     console.log(cartItemsName[i].innerHTML);
             //     console.log("------------------------");
             // }
+
+
+            // ADD TO THE TOTOAL AT THE END
+            let subtotalBox = document.createElement('div');
+            subtotalBox.classList.add('product-items');
+
+            let subtotalItems = document.getElementsByClassName('product-items')[0];
+
+            let checkoutContent = `
+                <div class="item row row-cols-4">
+                    <p class="col-sm-6 subtotal-font">${title}</p>
+                    <p class="col-sm-2 subtotal-font"></p>
+                    <p class="col-sm-2 subtotal-font">${price}</p>
+                    <p class="col-sm-2 subtotal-font"></p>
+                    <p class="black-line"></p>
+                </div>
+                `;
+
+            subtotalBox.innerHTML = checkoutContent;
+            subtotalItems.append(subtotalBox);
+
+
 
 
         }
@@ -308,7 +330,7 @@ $(document).ready(function () {
             let displayCVS = document.querySelector('#errorCVS');
             let cvsValid = true
 
-            if (cvs.length == 3) {
+            if (cvs.length == 3 || cvs.length == 4) {
                 displayCVS.innerHTML = `<span style='color:green'>Valid</span>`;
                 return cvsValid;
             } else {
@@ -661,26 +683,51 @@ $(document).ready(function () {
 
         
         // SUBMIT ORDER
+
+        $('#confirm-order').click( function(){
+
+        })
+
+
         const submitUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
 
-        fetch(submitUrl)
+        let submission_data = {
+            card_number: '0000 0000 0000'
+        }
+
+        let form_data = new FormData();
+        form_data.append('submission', JSON.stringify(submission_data));
+
+        const updatedData ={
+            method: 'POST',
+            cache: 'no-cache',
+            body: form_data
+        }
+
+        fetch(submitUrl, updatedData)
             .then(response => response.json())
-            .then(data => {
-                data.error.amount = 'SUMBITTED';
+            .then(theData => console.log(theData));
 
-                const updatedJSON = JSON.stringify(data);
 
-                const updatedOptions = {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    body: updatedJSON
-                };
+        // fetch(submitUrl)
+        //     .then(response => response.json())
+        //     .then(data => {
 
-                fetch(submitUrl, updatedOptions)
-                    .then(response => response.json())
-                    .then(updatedData => console.log(updatedData));
+        //         data.status = 'SUMBITTED';
 
-            })
+        //         const updatedJSON = JSON.stringify(data);
+
+        //         const updatedOptions = {
+        //             method: 'POST',
+        //             cache: 'no-cache',
+        //             body: updatedJSON
+        //         };
+
+        //         fetch(submitUrl, updatedOptions)
+        //             .then(response => response.json())
+        //             .then(updatedData => console.log(updatedData));
+
+        // });
 
        
            

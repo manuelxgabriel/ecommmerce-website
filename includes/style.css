@@ -98,6 +98,10 @@
     background: green;
 }
 
+.subtotal-font{
+    color: #4a6a25;
+}
+
 /* MODAL STYLING */
 .modal {
     --bs-modal-width: 900px;

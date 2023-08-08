@@ -82,7 +82,7 @@ $(document).ready(function () {
             var cartItems = document.getElementsByClassName('cart-content')[0];
             let cartItemsName = cartItems.getElementsByClassName('cart-product-title')
 
-            
+
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
@@ -132,9 +132,6 @@ $(document).ready(function () {
             subtotalBox.innerHTML = checkoutContent;
             subtotalItems.append(subtotalBox);
 
-
-
-
         }
 
 
@@ -154,10 +151,13 @@ $(document).ready(function () {
 
         }
 
+    
+
+
         // QUANTITY CHANGES 
         function quanityChange(event) {
             let input = event.target;
-            console.log(input.value);
+            // console.log(input.value);
             if (isNaN(input.value) || input.value <= 0) {
                 input.value = 1
             }
@@ -193,11 +193,9 @@ $(document).ready(function () {
             displayQuantity.innerHTML = count;
         }
 
-        updateTotal();
+        // updateTotal();
 
         // GET THE CURRENCY THAT WAS CHOOSEN
-        
-
         let currencyApiURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad.json';
 
         fetch(currencyApiURL)

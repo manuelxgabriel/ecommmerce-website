@@ -42,12 +42,18 @@
             <div class="offcanvas-body">
                 <div class="cart">
                     <!-- API CURRENCY -->
-                    <select name="currency" class="toCurrency">
-                        <option value="cad">Canadian Dollar $</option>
-                        <option value="jpy">Japanese Yen ¥</option>
-                        <option value="usd">US Dollar $</option>
+                    <div class="row row-cols-2">
+                        <!-- <div class="col-sm-6">
+                            <label for="from">From:</label>
+                            <select id="from"></select>
+                        </div> -->
+                        <div class="col-sm-6">
+                            <label for="to">Type Currency:</label>
+                            <select id="to"></select>
+                            <p>Symbol change for <br> JPY / GBP / USD / CAD</p>
+                        </div>
+                    </div>
 
-                    </select>
                     <h5 class="cart-title">New Cart</h5>
                     <!-- CART CONTENT -->
                     <div class="cart-content">
@@ -57,6 +63,7 @@
                     <!-- TOTAL -->
                     <div class="total">
                         <div class="total-title">Total</div>
+                        <div class="currencySymbol">$</div>
                         <div class="total-price">$0</div>
                     </div>
                     <!-- BUY BUTTON -->

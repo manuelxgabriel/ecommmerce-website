@@ -25,7 +25,14 @@ $(document).ready(function () {
                     <div class="card-body">
                         <h5 class="card-title">${data[i].title}</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <p class="card-text fw-bold displayCurrency">${data[i].price}</p>
+                        <div class="row row-cols-2">
+                            <div class="card-text fw-bold col-sm-1 currencySymbol">
+                            $
+                            </div>
+                            <div class="card-text fw-bold col-sm-8 displayCurrency" value="cad">
+                                <p class="theCurrency" value="cad">${data[i].price}</p>
+                            </div>
+                        </div>
                         <button class="btn btn-success add-cart" id="newButton">Add To Card</button>
                     </div>
                 </div>
@@ -80,7 +87,8 @@ $(document).ready(function () {
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
                 <div class="cart-product-title">${title}</div>
-                <div class="cart-price">$${price}</div>
+                <div class="currencySymbol">$</div>
+                <div class="cart-price displayCurrency">${price}</div>
                 <input type="number" value="1" class="cart-quantity">
             </div>
             <!-- REMOVE CART -->
@@ -166,36 +174,131 @@ $(document).ready(function () {
         updateTotal();
 
         // GET THE CURRENCY THAT WAS CHOOSEN
-        let toCurrency = document.querySelector('.toCurrency');
-        let resultFrom = ''
-        toCurrency.addEventListener('change', (event) => {
-            resultFrom = `${event.target.value}`;
+        
+
+        let currencyApiURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad.json';
+
+        fetch(currencyApiURL)
+            .then(response => response.json())
+            .then(data => {
+                const currencyKeys = Object.keys(data.cad);
+                // const fromCurrencySelect = document.getElementById('from');
+                const toCurrencySelect = document.getElementById('to');
+
+
+                currencyKeys.forEach(currency => {
+                    // const option1 = document.createElement('option');
+                    // option1.value = currency;
+                    // option1.textContent = currency;
+                    // fromCurrencySelect.appendChild(option1);
+
+                    const option2 = document.createElement('option');
+                    option2.value = currency;
+                    option2.textContent = currency;
+                    toCurrencySelect.appendChild(option2);
+                })
+            })
+
+            // .catch(error => {
+            //     console.error('Error fetching', error);
+            // });
+        
+
+            function convertCurrency(){
+                // const amount = parseFloat(document.getElementById('amount').value);
+                // const fromCurrency = document.getElementById('from').value;
+                const toCurrency = document.getElementById('to').value;
+
+                let productAmount = document.querySelectorAll('.displayCurrency');
+
+                let getCurrentCurrency = document.querySelectorAll('.theCurrency')[0];
+                let currencyResult = getCurrentCurrency.getAttribute('value');
+
+                let currencySymbol = document.querySelectorAll('.currencySymbol');
+
+                fetch(currencyApiURL)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if(data.cad.hasOwnProperty(currencyResult) && data.cad.hasOwnProperty(toCurrency)){
+
+                            for( let i = 0; i < productAmount.length; i++){
+                                let symbol = '';
+                                const exchangeRate = data.cad[toCurrency] / data.cad[currencyResult];
+                                const converstionedAmount = parseFloat(productAmount[i].textContent) * exchangeRate;
+                                if(toCurrency == 'jpy'){
+                                    symbol = '¥';
+                                    currencySymbol[i].innerHTML = `${symbol}`;
+                                    productAmount[i].innerHTML = `
+                                    <p class="theCurrency" value="${toCurrency}">${converstionedAmount.toFixed(2)}</p>
+                                    `;
+                                } else if (toCurrency == 'gbp'){
+                                    symbol = '£';
+                                    currencySymbol[i].innerHTML = `${symbol}`;
+                                    productAmount[i].innerHTML = `
+                                    <p class="theCurrency" value="${toCurrency}">${converstionedAmount.toFixed(2)}</p>
+                                    `;
+                                } else {
+                                    symbol = '$';
+                                    currencySymbol[i].innerHTML = `${symbol}`;
+                                    productAmount[i].innerHTML = `
+                                    <p class="theCurrency" value="${toCurrency}">${converstionedAmount.toFixed(2)}</p>
+                                    `;
+                                }
+                                
+                            }
+
+                        }
+
+                    })
+                
+            }
+
+        let convert = document.getElementById('to');
+        convert.addEventListener('change', convertCurrency);
+
+
+
+
+        // let displayCurrency = document.querySelectorAll('.displayCurrency');
+        // let displaySymbol = document.querySelectorAll('.currencySymbol');
+        // let toCurrency = document.querySelector('.toCurrency');
+        // let yenSymbol = '¥';
+        // let dollarSymbol = '$';
+        // let resultFrom = ''
+
+
+        // toCurrency.addEventListener('change', (event) => {
+        //     resultFrom = `${event.target.value}`;
+        // });
+
 
             // CHANGE TO JPY
-            if (resultFrom == 'jpy') {
-                let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
-                fetch(currencies)
-                    .then(response => response.json())
-                    .then(data => console.log(data.jpy));
-            }
+            // if (resultFrom == 'jpy') {
+            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
+            //     fetch(currencies)
+            //         .then(response => response.json())
+            //         .then(data => {data});
+
+            // }
             // CHANGE TO USD
-            else if (resultFrom == 'usd') {
-                let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
-                fetch(currencies)
-                    .then(response => response.json())
-                    .then(data => console.log(data.usd));
-            }
-            else {
-                let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/cad.json`;
-                fetch(currencies)
-                    .then(response => response.json())
-                    .then(data => console.log(data.cad));
-            }
+            // else if (resultFrom == 'usd') {
+            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
+            //     fetch(currencies)
+            //         .then(response => response.json())
+            //         .then(data => console.log(data.usd));
+            // }
+            // else {
+            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/cad.json`;
+            //     fetch(currencies)
+            //         .then(response => response.json())
+            //         .then(data => {data});
+            // }
 
 
 
 
-        });
+
 
 
         function checkCard(input) {
@@ -319,7 +422,10 @@ $(document).ready(function () {
 
             let personInfo = new Billing(firstName, lastName, address, city, state, country, postal, phone, email);
 
-            // $('#pills-contact-tab').click();
+            if(firstResult && lastResult && cityResult && postalResult && countryResult && stateResult && phoneResult && emailResult){
+                $('#pills-contact-tab').click();
+            }
+            
         });
 
         function checkFirst(value){

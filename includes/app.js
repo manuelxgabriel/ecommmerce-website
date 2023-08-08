@@ -257,49 +257,7 @@ $(document).ready(function () {
         let convert = document.getElementById('to');
         convert.addEventListener('change', convertCurrency);
 
-
-
-
-        // let displayCurrency = document.querySelectorAll('.displayCurrency');
-        // let displaySymbol = document.querySelectorAll('.currencySymbol');
-        // let toCurrency = document.querySelector('.toCurrency');
-        // let yenSymbol = '¥';
-        // let dollarSymbol = '$';
-        // let resultFrom = ''
-
-
-        // toCurrency.addEventListener('change', (event) => {
-        //     resultFrom = `${event.target.value}`;
-        // });
-
-
-            // CHANGE TO JPY
-            // if (resultFrom == 'jpy') {
-            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
-            //     fetch(currencies)
-            //         .then(response => response.json())
-            //         .then(data => {data});
-
-            // }
-            // CHANGE TO USD
-            // else if (resultFrom == 'usd') {
-            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/${resultFrom}.json`;
-            //     fetch(currencies)
-            //         .then(response => response.json())
-            //         .then(data => console.log(data.usd));
-            // }
-            // else {
-            //     let currencies = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad/cad.json`;
-            //     fetch(currencies)
-            //         .then(response => response.json())
-            //         .then(data => {data});
-            // }
-
-
-
-
-
-
+        
 
         function checkCard(input) {
             // let cardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
@@ -700,6 +658,33 @@ $(document).ready(function () {
             
 
         }
+
+        
+        // SUBMIT ORDER
+        const submitUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
+
+        fetch(submitUrl)
+            .then(response => response.json())
+            .then(data => {
+                data.error.amount = 'SUMBITTED';
+
+                const updatedJSON = JSON.stringify(data);
+
+                const updatedOptions = {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    body: updatedJSON
+                };
+
+                fetch(submitUrl, updatedOptions)
+                    .then(response => response.json())
+                    .then(updatedData => console.log(updatedData));
+
+            })
+
+       
+           
+   
 
 
 

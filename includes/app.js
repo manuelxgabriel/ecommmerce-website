@@ -80,8 +80,9 @@ $(document).ready(function () {
             let cartShopBox = document.createElement('div');
             cartShopBox.classList.add('cart-box');
             var cartItems = document.getElementsByClassName('cart-content')[0];
-            let cartItemsName = cartItems.getElementsByClassName('cart-product-title');
+            // let cartItemsName = cartItems.getElementsByClassName('cart-product-title');
 
+            // DISPLAY THE ADDED ITEMS INTO THE CART
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
@@ -99,6 +100,7 @@ $(document).ready(function () {
             cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
             cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quanityChange);
 
+            // SHOW THE AMOUNT OF ITEMS IN THE CART
             $('.show-quantity').show();
             count += 1;
             displayQuantity = document.querySelector('.show-quantity');

@@ -81,10 +81,6 @@ $(document).ready(function () {
             cartShopBox.classList.add('cart-box');
             var cartItems = document.getElementsByClassName('cart-content')[0];
             let cartItemsName = cartItems.getElementsByClassName('cart-product-title');
-            for(let i = 0; i < cartItemsName.length; i++){
-               console.log("Already added"); 
-            }
-
 
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
@@ -189,6 +185,26 @@ $(document).ready(function () {
 
         }
 
+        // CLEAR EVERYTHING IN THE CART
+        function clearCart(){
+            // CLEAR CART-CONTENT
+            let cartContent = document.querySelector('.cart-content');
+            while(cartContent.firstChild){
+                cartContent.removeChild(cartContent.firstChild);
+            }
+
+            //CLEAR product-items
+            let subtotalItems = document.querySelector('.product-items');
+            while(subtotalItems.firstChild){
+                subtotalItems.removeChild(subtotalItems.firstChild);
+            }
+
+            updateTotal();
+        }
+
+        $('#clear-btn').click(function (){
+            clearCart();
+        })
 
 
         let total;
@@ -297,6 +313,11 @@ $(document).ready(function () {
                     })
                 
             }
+
+
+        // DISABLE THE TABS UNTIL THE FORM HAVE BEEN COMPLETED
+        $('.nav li').not('.active').addClass('disabled');
+        $('nav li').not('.active').find()
 
         let convert = document.getElementById('to');
         convert.addEventListener('change', convertCurrency);
@@ -702,92 +723,65 @@ $(document).ready(function () {
         }
 
         
-        // SUBMIT ORDER
-
-        // $('#confirm-order').click( function(){
-
-        // });
-
-
-    
+        // SUBMIT ORDER & GET ALL OF THE INFORMATION FROM THE USER 
+        let form = document.querySelector('#myForm');
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
 
 
-        const submitUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
+            let postUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
 
-        let customer_data = { 
-            card_number: 'valid credit card number, no spaces',
-            expiry_month: 'two digit month number -- example: 01',
-            expiry_year: 'four digit year -- example: 2022',
-            security_code: 'three or four digit number',
-            amount: 'amount to bill -- example: 23.45',
-            taxes: 'amount of taxes -- example: 12.34',
-            shipping_amount: 'amount of shipping charges -- example: 5.11',
-            currency: 'three character currency code, MUST be lowercase -- example: cad',
-            // items: { ... },
-            billing: {
-                first_name: 'John',
-                last_name: 'Doe',
-                address_1: '123 Some St',
-                address_2: 'Second Street Info [Optional] ',
-                city: 'Some City',
-                province: 'Two Character Province or State Code',
-                country: 'Two Character Country Code',
-                postal: 'Valid Postal or ZIP Code',
-                phone: 'Valid International or North American Phone Number',
-                email: 'Valid Email Address'
-            },
-            shipping: {
-                first_name: 'John',
-                last_name: 'Doe',
-                address_1: '123 Some St',
-                address_2: 'Second Street Info [Optional] ',
-                city: 'Some City',
-                province: 'Two Character Province or State Code',
-                country: 'Two Character Country Code',
-                postal: 'Valid Postal or ZIP Code'  
-            }
-        }
+            let jsonPayload = {
+                "error": {
+                    card_number: '0000 0000 0000 0000',
+                },
+                "status": 'NOT SUBMITTED'
+            };
 
-        let form_data = new FormData();
-        form_data.append('submission', JSON.stringify(customer_data));
+            jsonPayload.status = 'SUBMITTED';
+
+            let form_data = new FormData();
+            form.append('submission', JSON.stringify(form_data));
+
+            fetch(postUrl, {
+                method: 'POST',
+                body: form_data
+            })
+            .then(answer => answer.json())
+            .then(theAnswer => console.log(theAnswer));
 
 
-        for(let pair of form_data.entries()){
-            console.log(pair[0] + pair[1] );
-        }
-        // console.log(form_data.entries());
-
-        const updatedData ={
-            method: 'POST',
-            cache: 'no-cache',
-            body: form_data
-        }
+        });
 
 
-        fetch(submitUrl, updatedData)
-            .then(theResponse => theResponse.json())
-            // .then(theData => console.log(theData));
+        $('#confirm-order').click( function(){
+            clearCart();
+            $('#exampleModal').modal('hide');
+        });
 
 
-        // fetch(submitUrl)
-        //     .then(response => response.json())
-        //     .then(data => {
+        // const submitUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
 
-        //         data.status = 'SUMBITTED';
+        // let jsonPayload = {
+        //     "error": {
+        //         card_number: '0000 0000 0000 0000',
+        //     },
+        //     "status": 'NOT SUBMITTED'
+        // };
 
-        //         const updatedJSON = JSON.stringify(data);
+        // jsonPayload.status = 'SUBMITTED';
 
-        //         const updatedOptions = {
-        //             method: 'POST',
-        //             cache: 'no-cache',
-        //             body: updatedJSON
-        //         };
+        // let form_data = new FormData();
+        // form_data.append('submission', JSON.stringify(jsonPayload));
 
-        //         fetch(submitUrl, updatedOptions)
-        //             .then(response => response.json())
-        //             .then(updatedData => console.log(updatedData));
-
-        // });
+        // fetch(submitUrl, {
+        //     method: 'POST',
+        //     body: form_data
+        // })
+        // .then(answer => answer.json())
+        // .then(theAnswer => {
+        //     console.log(theAnswer);
+        // })
 
        
            

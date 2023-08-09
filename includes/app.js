@@ -80,9 +80,12 @@ $(document).ready(function () {
             let cartShopBox = document.createElement('div');
             cartShopBox.classList.add('cart-box');
             var cartItems = document.getElementsByClassName('cart-content')[0];
-            let cartItemsName = cartItems.getElementsByClassName('cart-product-title')
+            let cartItemsName = cartItems.getElementsByClassName('cart-product-title');
+            for(let i = 0; i < cartItemsName.length; i++){
+               console.log("Already added"); 
+            }
 
-            
+
             let cartBoxContent = `
             <img src="${img}" alt="" class="cart-img">
             <div class="detail-box">
@@ -113,7 +116,7 @@ $(document).ready(function () {
             // }
 
 
-            // ADD TO THE TOTOAL AT THE END
+            // ADD TO THE TOTAL AT THE END
             let subtotalBox = document.createElement('div');
             subtotalBox.classList.add('product-items');
 
@@ -131,9 +134,7 @@ $(document).ready(function () {
 
             subtotalBox.innerHTML = checkoutContent;
             subtotalItems.append(subtotalBox);
-
-
-
+            
 
         }
 
@@ -149,33 +150,35 @@ $(document).ready(function () {
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
 
-
+            
             updateTotal();
 
         }
 
+    
+
+
         // QUANTITY CHANGES 
         function quanityChange(event) {
             let input = event.target;
-            console.log(input.value);
+            // console.log(input.value);
             if (isNaN(input.value) || input.value <= 0) {
                 input.value = 1
             }
 
             count += 1;
-
-
             updateTotal();
 
         }
 
 
 
-        let total = 0;
         //UPDATE TOTAL
         function updateTotal() {
             let cartContent = document.querySelectorAll('.cart-content')[0];
             let cartBoxes = cartContent.querySelectorAll('.cart-box');
+            
+            let total = 0;
             for (let i = 0; i < cartBoxes.length; i++) {
                 let cartBox = cartBoxes[i]
                 let priceElement = cartBox.querySelectorAll('.cart-price')[0];
@@ -186,18 +189,18 @@ $(document).ready(function () {
 
                 total = Math.round(total * 100) / 100;
             }
+            console.log(total);
 
-            document.querySelectorAll('.total-price')[0].innerHTML = `$ ${total}`;
+            document.querySelectorAll('.total-price')[0].innerHTML = `${total}`;
 
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
+
         }
 
-        updateTotal();
+        // updateTotal();
 
         // GET THE CURRENCY THAT WAS CHOOSEN
-        
-
         let currencyApiURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad.json';
 
         fetch(currencyApiURL)

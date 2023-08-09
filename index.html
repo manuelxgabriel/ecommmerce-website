@@ -97,12 +97,6 @@
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <!-- <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                                aria-selected="false">
-                                <i class="bi bi-person-lines-fill"></i>
-                                Billing Details
-                            </button> -->
                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                                 aria-selected="false">
@@ -139,7 +133,7 @@
                                     <span class="input-group-text" id="basic-addon3"><i
                                             class="bi bi-credit-card-2-back"></i></span>
                                     <input type="text" id="creditNumber" class="form-control" id="basic-url"
-                                        aria-describedby="basic-addon3 basic-addon4" placeholder="Credit Card Number">
+                                        aria-describedby="basic-addon3 basic-addon4" placeholder="Credit Card Number: 4111 1111 1111 1111">
                                 </div>
                                 <div id="errorCard"></div>
                             </div>
@@ -148,7 +142,8 @@
                                 <div class="row row-cols-3">
                                     <div class="col-sm-4">
                                         <input type="number" id="month" class="form-control m-3" placeholder="MM"
-                                            aria-label="Username">
+                                            aria-label="Username" min="1" max="12"required>
+                                        
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="number" id="year" class="form-control m-3" placeholder="YYYY"
@@ -228,8 +223,7 @@
                                                 </select>
                                                 
                                             </div>
-                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
-                                                input group.</div>
+                                            <div class="form-text" id="basic-addon4">Select country first</div>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -242,8 +236,7 @@
                                                     <option value="usa">United States</option>
                                                 </select>
                                             </div>
-                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
-                                                input group.</div>
+                                            <div class="form-text" id="basic-addon4">Select country</div>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -338,8 +331,7 @@
                                                 </select>
                                                 
                                             </div>
-                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
-                                                input group.</div>
+                                            <div class="form-text" id="basic-addon4">Select a country first</div>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -352,8 +344,7 @@
                                                     <option value="usa">United States</option>
                                                 </select>
                                             </div>
-                                            <div class="form-text" id="basic-addon4">Example help text goes outside the
-                                                input group.</div>
+                                            <div class="form-text" id="basic-addon4"> Select a country</div>
                                         </div>
                                     </div>
                                     <div class="col">

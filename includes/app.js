@@ -115,7 +115,7 @@ $(document).ready(function () {
             //     console.log("------------------------");
             // }
 
-
+            
             // ADD TO THE TOTAL AT THE END
             let subtotalBox = document.createElement('div');
             subtotalBox.classList.add('product-items');
@@ -142,8 +142,26 @@ $(document).ready(function () {
 
         // REMOVE ITEMS FROM CART
         function removeCartItem(event) {
-            let buttonClicked = event.target
-            buttonClicked.parentElement.remove();
+            // let buttonClicked = event.target
+            // buttonClicked.parentElement.remove();
+
+            let buttonClicked = event.target;
+            let cartBox =buttonClicked.parentElement;
+
+
+            // REMOVE THE ITEM FROM THE CART-CONTENT
+            cartBox.remove();
+
+            let productName = cartBox.querySelector('.cart-product-title').textContent;
+            let subtotalItems = document.querySelectorAll('.product-items')[0];
+            let productsInSubtotal = subtotalItems.querySelectorAll('.item');
+
+            for (let i = 0; i < productsInSubtotal.length; i++){
+                if(productsInSubtotal[i].querySelector('.subtotal-font').textContent === productName){
+                    productsInSubtotal[i].remove();
+                    break;
+                }
+            }
 
             count -= 1;
 
@@ -161,7 +179,7 @@ $(document).ready(function () {
         // QUANTITY CHANGES 
         function quanityChange(event) {
             let input = event.target;
-            // console.log(input.value);
+            
             if (isNaN(input.value) || input.value <= 0) {
                 input.value = 1
             }
@@ -173,12 +191,13 @@ $(document).ready(function () {
 
 
 
+        let total;
         //UPDATE TOTAL
         function updateTotal() {
             let cartContent = document.querySelectorAll('.cart-content')[0];
             let cartBoxes = cartContent.querySelectorAll('.cart-box');
             
-            let total = 0;
+            total = 0;
             for (let i = 0; i < cartBoxes.length; i++) {
                 let cartBox = cartBoxes[i]
                 let priceElement = cartBox.querySelectorAll('.cart-price')[0];
@@ -189,12 +208,12 @@ $(document).ready(function () {
 
                 total = Math.round(total * 100) / 100;
             }
-            console.log(total);
 
             document.querySelectorAll('.total-price')[0].innerHTML = `${total}`;
 
             displayQuantity = document.querySelector('.show-quantity');
             displayQuantity.innerHTML = count;
+
 
         }
 
@@ -306,10 +325,10 @@ $(document).ready(function () {
             let monthValid = true;
 
             if (month > 0 && month <= 12) {
-                displayMonth.innerHTML = `<span style='color:green'>Valid</span>`;
+                displayMonth.innerHTML = `<span style='color:green'>Valid Month</span>`;
                 return monthValid;
             } else {
-                displayMonth.innerHTML = `<span style='color:red'>Invalid</span>`;
+                displayMonth.innerHTML = `<span style='color:red'>Invalid Month</span>`;
                 return monthValid = false;
             }
 
@@ -321,10 +340,10 @@ $(document).ready(function () {
             let yearValid = true;
 
             if (year.length == 4 && parseInt(year) >= 2023) {
-                displayYear.innerHTML = `<span style='color:green'>Valid</span>`;
+                displayYear.innerHTML = `<span style='color:green'>Valid Year</span>`;
                 return yearValid;
             } else {
-                displayYear.innerHTML = `<span style='color:red'>Invalid</span>`;
+                displayYear.innerHTML = `<span style='color:red'>Invalid Year</span>`;
                 return yearValid = false;
             }
         }
@@ -334,10 +353,10 @@ $(document).ready(function () {
             let cvsValid = true
 
             if (cvs.length == 3 || cvs.length == 4) {
-                displayCVS.innerHTML = `<span style='color:green'>Valid</span>`;
+                displayCVS.innerHTML = `<span style='color:green'>Valid CVS</span>`;
                 return cvsValid;
             } else {
-                displayCVS.innerHTML = `<span style='color:red'>Invalid</span>`;
+                displayCVS.innerHTML = `<span style='color:red'>Invalid CVS</span>`;
                 return cvsValid = false;
             }
         }
@@ -678,8 +697,6 @@ $(document).ready(function () {
                 orderTotal.innerHTML = `$${orderPrice.toFixed(2)}`;
 
             }
-
-           
             
 
         }
@@ -709,7 +726,7 @@ $(document).ready(function () {
 
         fetch(submitUrl, updatedData)
             .then(response => response.json())
-            .then(theData => console.log(theData));
+            // .then(theData => console.log(theData));
 
 
         // fetch(submitUrl)

@@ -704,19 +704,58 @@ $(document).ready(function () {
         
         // SUBMIT ORDER
 
-        $('#confirm-order').click( function(){
+        // $('#confirm-order').click( function(){
 
-        })
+        // });
+
+
+    
 
 
         const submitUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
 
-        let submission_data = {
-            card_number: '0000 0000 0000'
+        let customer_data = { 
+            card_number: 'valid credit card number, no spaces',
+            expiry_month: 'two digit month number -- example: 01',
+            expiry_year: 'four digit year -- example: 2022',
+            security_code: 'three or four digit number',
+            amount: 'amount to bill -- example: 23.45',
+            taxes: 'amount of taxes -- example: 12.34',
+            shipping_amount: 'amount of shipping charges -- example: 5.11',
+            currency: 'three character currency code, MUST be lowercase -- example: cad',
+            // items: { ... },
+            billing: {
+                first_name: 'John',
+                last_name: 'Doe',
+                address_1: '123 Some St',
+                address_2: 'Second Street Info [Optional] ',
+                city: 'Some City',
+                province: 'Two Character Province or State Code',
+                country: 'Two Character Country Code',
+                postal: 'Valid Postal or ZIP Code',
+                phone: 'Valid International or North American Phone Number',
+                email: 'Valid Email Address'
+            },
+            shipping: {
+                first_name: 'John',
+                last_name: 'Doe',
+                address_1: '123 Some St',
+                address_2: 'Second Street Info [Optional] ',
+                city: 'Some City',
+                province: 'Two Character Province or State Code',
+                country: 'Two Character Country Code',
+                postal: 'Valid Postal or ZIP Code'  
+            }
         }
 
         let form_data = new FormData();
-        form_data.append('submission', JSON.stringify(submission_data));
+        form_data.append('submission', JSON.stringify(customer_data));
+
+
+        for(let pair of form_data.entries()){
+            console.log(pair[0] + pair[1] );
+        }
+        // console.log(form_data.entries());
 
         const updatedData ={
             method: 'POST',
@@ -724,8 +763,9 @@ $(document).ready(function () {
             body: form_data
         }
 
+
         fetch(submitUrl, updatedData)
-            .then(response => response.json())
+            .then(theResponse => theResponse.json())
             // .then(theData => console.log(theData));
 
 

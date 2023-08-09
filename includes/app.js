@@ -233,7 +233,6 @@ $(document).ready(function () {
 
         }
 
-        // updateTotal();
 
         // GET THE CURRENCY THAT WAS CHOOSEN
         let currencyApiURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cad.json';
@@ -316,14 +315,20 @@ $(document).ready(function () {
 
 
         // DISABLE THE TABS UNTIL THE FORM HAVE BEEN COMPLETED
-        $('.nav li').not('.active').addClass('disabled');
-        $('nav li').not('.active').find()
+        // $('.nav-item button').not('.active').addClass('disabled');
+        // $('.nav-item button').not('.active').find('button').removeAttr("data-bs-toggle");
+        
+
+
+
+
 
         let convert = document.getElementById('to');
         convert.addEventListener('change', convertCurrency);
 
         
 
+        // CHECK THE CARD IS VALID 
         function checkCard(input) {
             // let cardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
             let cardRegex = /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/;
@@ -340,7 +345,8 @@ $(document).ready(function () {
 
         }
 
-        function checkMonth(month, year, cvs) {
+        // CHECK THE MONTH IS WITHIN 1 - 12
+        function checkMonth(month) {
 
             let displayMonth = document.querySelector('#errorMonth');
             let monthValid = true;
@@ -400,7 +406,12 @@ $(document).ready(function () {
             let cvsResult = checkCVS(cardCVS);
 
             if (cardResult && monthResult && yearResult && cvsResult) {
+                
+                // $('#pills-profile-tab').addClass('active');
+                // $('#pills-home-tab').removeClass('active');
                 $("#pills-profile-tab").click();
+
+                
             }
 
         });
@@ -446,6 +457,7 @@ $(document).ready(function () {
             let personInfo = new Billing(firstName, lastName, address, city, state, country, postal, phone, email);
 
             if(firstResult && lastResult && cityResult && postalResult && countryResult && stateResult && phoneResult && emailResult){
+                
                 $('#pills-contact-tab').click();
             }
             
@@ -603,7 +615,8 @@ $(document).ready(function () {
         // SHIPPING INFORMATION
         $('#shippingInfo').click(function (){
             displayTaxInfo(); // DISPLAY THE TAXES WHEN THE PROVINCE
-
+            // $('#pills-profile-tab').removeClass('active');
+            // $('#pills-disabled-tab').addClass('active');
             $('#pills-disabled-tab').click();
         });
 
@@ -693,7 +706,7 @@ $(document).ready(function () {
         }
 
 
-        
+        // GET THE TAGS TO DISPLAY THE TOTAL COST
         let subtotal = document.getElementById('subtotal');
         let taxElementInfo = document.getElementById('tax-info');
         let locationTax = document.getElementById('location-tax');
@@ -748,8 +761,10 @@ $(document).ready(function () {
                 body: form_data
             })
             .then(answer => answer.json())
-            .then(theAnswer => console.log(theAnswer));
+            // .then(theAnswer => console.log(theAnswer));
 
+            // I TRIED FIGURING OUT HOW TO SEND A POST REQUEST
+            // BUT IT WAS NOT POSTING IT TO THE URL
 
         });
 

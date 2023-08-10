@@ -743,27 +743,53 @@ $(document).ready(function () {
         form.addEventListener('submit', function(e){
             e.preventDefault();
 
-
             let postUrl = 'https://deepblue.camosun.bc.ca/~c0180354/ics128/final/';
 
-            let jsonPayload = {
-                "error": {
-                    card_number: '0000 0000 0000 0000',
+            let submission_data = {
+                card_number: 'valid credit card number, no spaces', // get info from form -> credit card number
+                expiry_month: 'two digit month number -- example: 01', 
+                expiry_year: 'four digit year -- example: 2022',
+                security_code: 'three or four digit number',
+                amount: 'amount to bill -- example: 23.45',
+                taxes: 'amount of taxes -- example: 12.34',
+                shipping_amount: 'amount of shipping charges -- example: 5.11',
+                currency: 'three character currency code, MUST be lowercase -- example: cad',
+                items: {},
+                billing: {
+                    first_name: 'John',
+                    last_name: 'Doe',
+                    address_1: '123 Some St',
+                    address_2: 'Second Street Info [Optional] ',
+                    city: 'Some City',
+                    province: 'Two Character Province or State Code',
+                    country: 'Two Character Country Code',
+                    postal: 'Valid Postal or ZIP Code',
+                    phone: 'Valid International or North American Phone Number',
+                    email: 'Valid Email Address'
                 },
-                "status": 'NOT SUBMITTED'
-            };
-
-            jsonPayload.status = 'SUBMITTED';
-
+                shipping: {
+                    first_name: 'John',
+                    last_name: 'Doe',
+                    address_1: '123 Some St',
+                    address_2: 'Second Street Info [Optional] ',
+                    city: 'Some City',
+                    province: 'Two Character Province or State Code',
+                    country: 'Two Character Country Code',
+                    postal: 'Valid Postal or ZIP Code'  
+                }
+            }
             let form_data = new FormData();
-            form.append('submission', JSON.stringify(form_data));
+            form_data('submission',JSON.stringify(submission_data));
 
             fetch(postUrl, {
                 method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
                 body: form_data
             })
             .then(answer => answer.json())
-            // .then(theAnswer => console.log(theAnswer));
+            .then(theAnswer => console.log(theAnswer));
 
             // I TRIED FIGURING OUT HOW TO SEND A POST REQUEST
             // BUT IT WAS NOT POSTING IT TO THE URL
